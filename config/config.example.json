@@ -1,0 +1,35 @@
+{
+  "$schema": "./config.schema.json",
+  "adbPath": "platform-tools\\adb.exe",
+  "logDirectory": "%LOCALAPPDATA%\\AndroidDisplayVoiceBridge",
+  "behavior": {
+    "showNotifications": true,
+    "logRecognizedText": false,
+    "armTimeoutSeconds": 30,
+    "finalTimeoutSeconds": 15,
+    "reconnectDelayMilliseconds": 2500,
+    "duplicateSuppressionMilliseconds": 1500
+  },
+  "devices": [
+    {
+      "name": "请先完成设备探测",
+      "enabled": false,
+      "serial": "192.168.1.100:5555",
+      "autoConnect": true,
+      "keepAndroidAwakeWhilePowered": false,
+      "inputDevice": "/dev/input/event0",
+      "keyToken": "KEY_VOICECOMMAND",
+      "logcatFilter": "VoiceControl:I",
+      "finalAsrPattern": "FINAL_ASR:\\s*(?<text>.*?)(?:,\\s*dialogId\\s*=\\s*(?<id>[^\\s]+))?$",
+      "voicePackage": "",
+      "manageVoicePackage": false,
+      "disableVoicePackageWhenInactive": false,
+      "stopAssistantAfterFinal": false,
+      "startServiceFallback": false,
+      "serviceComponent": "",
+      "keyDownAction": "",
+      "keyUpAction": "",
+      "remoteType": 0
+    }
+  ]
+}

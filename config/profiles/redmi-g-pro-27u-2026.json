@@ -1,0 +1,35 @@
+{
+  "$schema": "../config.schema.json",
+  "adbPath": "platform-tools\\adb.exe",
+  "logDirectory": "%LOCALAPPDATA%\\AndroidDisplayVoiceBridge",
+  "behavior": {
+    "showNotifications": true,
+    "logRecognizedText": false,
+    "armTimeoutSeconds": 30,
+    "finalTimeoutSeconds": 15,
+    "reconnectDelayMilliseconds": 2500,
+    "duplicateSuppressionMilliseconds": 1500
+  },
+  "devices": [
+    {
+      "name": "Redmi G Pro 27U 2026",
+      "enabled": false,
+      "serial": "192.168.1.100:5555",
+      "autoConnect": true,
+      "keepAndroidAwakeWhilePowered": true,
+      "inputDevice": "/dev/input/event6",
+      "keyToken": "KEY_F5",
+      "logcatFilter": "=vc=en=arp=:I",
+      "finalAsrPattern": "onAsrResult:\\s*(?<text>.*?),\\s*isFinal\\s*=\\s*true,\\s*isNlpRequest\\s*=.*?dialogId\\s*=\\s*(?<id>[^\\s]+)",
+      "voicePackage": "com.xiaomi.voicecontrol",
+      "manageVoicePackage": true,
+      "disableVoicePackageWhenInactive": false,
+      "stopAssistantAfterFinal": true,
+      "startServiceFallback": true,
+      "serviceComponent": "com.xiaomi.voicecontrol/.VoiceControlService",
+      "keyDownAction": "com.xiaomi.mitv.voice.KEYDOWN",
+      "keyUpAction": "com.xiaomi.mitv.voice.KEYUP",
+      "remoteType": 8
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+name: 新设备适配
+description: 提交一个经过脱敏的 Android 智能显示器适配请求或实测 profile
+title: "[Device] 厂商 型号 / 系统版本"
+labels: ["device-support"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请勿提交真实局域网 IP、设备 serial、账号、ADB 私钥、完整 logcat 或个人语音正文。
+  - type: input
+    id: model
+    attributes:
+      label: 厂商与完整型号
+      placeholder: 例如 Redmi G Pro 27U 2026
+    validations:
+      required: true
+  - type: input
+    id: firmware
+    attributes:
+      label: Android / 系统版本与 build
+    validations:
+      required: true
+  - type: dropdown
+    id: adb
+    attributes:
+      label: ADB 状态
+      options:
+        - 已连接并授权
+        - 能连接但 unauthorized / offline
+        - 找不到 ADB 开关
+    validations:
+      required: true
+  - type: textarea
+    id: key_event
+    attributes:
+      label: 脱敏后的麦克风按键事件
+      description: 只贴 event 节点、EV_KEY、KEY_*、DOWN / UP
+      render: text
+  - type: textarea
+    id: final_log
+    attributes:
+      label: 脱敏后的最终 ASR 日志样例
+      description: 用“测试文本”替换真实正文，保留字段结构和 tag
+      render: text
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: 隐私确认
+      options:
+        - label: 我已经移除 IP、设备 serial、账号、密钥、令牌和个人语音内容
+          required: true

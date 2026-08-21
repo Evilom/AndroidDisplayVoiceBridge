@@ -1,0 +1,26 @@
+# Build output
+artifacts/
+src/bin/
+src/obj/
+*.pdb
+tests/*.exe
+
+# Local configuration and diagnostics
+config.json
+config.local.json
+*.local.json
+*.log
+!tests/fixtures/*.log
+diagnostics/
+
+# Downloaded tools
+platform-tools/
+*.zip
+
+# IDE / OS
+.vs/
+.vscode/settings.json
+*.user
+*.suo
+.DS_Store
+Thumbs.db
