@@ -129,7 +129,33 @@ Set-ExecutionPolicy -Scope Process Bypass
 adb -s 192.168.1.101:5555 shell settings put global stay_on_while_plugged_in 0
 ```
 
-## 7. 手工修改配置
+## 7. 完整重启后 ADB 自动关闭
+
+固件 `OS3.0.102.0.UFFMAMN` 会在启动早期主动停止普通侧载应用，并在网络 ADB
+短暂出现后再次关闭它。`keepAndroidAwakeWhilePowered` 只能缓解待机，不能解决完整
+重启。
+
+仓库提供可选的设备端 [ADB Keeper](../companion/adb-keeper/README.md)。该固件预留了
+未安装的 `com.example.autoreboot` 自启动兼容身份；MiTV 构建使用该身份后可以收到
+开机广播，在 HyperOS 二次复位后重新写入 `adb_enabled=1`。两台 Redmi G Pro 27U
+2026 已完成真实重启验证，恢复通常需要 1–2 分钟。
+
+前提与风险：
+
+- 第一次安装前仍需手动打开 ADB，并接受电脑的 RSA 授权。
+- 必须用 ADB 一次性授予 `WRITE_SECURE_SETTINGS`；它不会显示普通权限弹窗。
+- 5555 会长期暴露在显示器所在局域网，只能用于可信家庭网络，禁止路由器端口转发。
+- 其他固件未必拥有相同白名单，不能直接假设兼容。
+
+安装已构建的 MiTV APK：
+
+```powershell
+.\companion\adb-keeper\install-mitv.ps1 `
+  -Serial 192.168.1.101:5555,192.168.1.102:5555 `
+  -ApkPath .\companion\adb-keeper\out\ADB-Keeper-MiTV-v0.1.4.apk
+```
+
+## 8. 手工修改配置
 
 配置文件：
 
@@ -139,7 +165,7 @@ adb -s 192.168.1.101:5555 shell settings put global stay_on_while_plugged_in 0
 
 退出通知区域程序后编辑，保存，再重新启动 EXE。IP 变化时只需要改 `devices[].serial`。若显示器升级后按键失效，重新探测 `inputDevice` 和 `keyToken`。
 
-## 8. 回退与卸载
+## 9. 回退与卸载
 
 只退出程序：右击通知区域图标 → 退出。由于 profile 默认不在退出时 disable 包，小爱应恢复原生行为。
 
@@ -162,3 +188,9 @@ adb -s 192.168.1.101:5555 shell pm enable --user 0 com.xiaomi.voicecontrol
 ```
 
 卸载不会关闭显示器上的 ADB。若不再调试，请到显示器设置中手动关闭。
+
+移除显示器端 ADB Keeper：
+
+```powershell
+adb -s 192.168.1.101:5555 uninstall com.example.autoreboot
+```

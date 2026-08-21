@@ -4,6 +4,15 @@
 
 ## [Unreleased]
 
+### Added
+
+- 可选的显示器端 ADB Keeper，在端口停止监听时重新启用网络 ADB。
+- Redmi G Pro 27U 2026 / HyperOS 3 的 `com.example.autoreboot` 白名单兼容构建、双机重启验证和安装脚本。
+
+### Security
+
+- 文档明确说明 `WRITE_SECURE_SETTINGS`、长期开放 5555 和固件专用包身份的风险边界。
+
 ## [0.1.0] - 2026-08-21
 
 ### Added

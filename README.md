@@ -153,6 +153,7 @@ Set-ExecutionPolicy -Scope Process Bypass
 - 默认日志不记录识别正文；设置 `logRecognizedText: true` 才会记录内容。
 - `force-stop` / `pm enable` / `pm disable-user` 会改变显示器上的语音助手行为。只有经过验证的 profile 才应启用这些操作。
 - `keepAndroidAwakeWhilePowered` 可缓解部分固件待机后关闭 ADB，但会增加 Android 系统待机功耗；通用 profile 默认关闭。
+- Redmi G Pro 27U 2026 固件若在完整重启后复位 ADB，可选装设备端 [ADB Keeper](companion/adb-keeper/README.md)。它需要一次性 ADB 授权，并会让 5555 长期存在于可信局域网。
 - 本方法依赖厂商未屏蔽的系统日志。日志被裁剪、权限收紧或语音服务变更后，可能无法适配。
 - 仅支持 Windows 文本注入；Linux/macOS 尚未实现。
 
@@ -162,6 +163,7 @@ Set-ExecutionPolicy -Scope Process Bypass
 
 - [前置条件与兼容性判断](docs/prerequisites.md)
 - [Redmi G Pro 27U 2026 完整教程](docs/redmi-g-pro-27u-2026.md)
+- [显示器端 ADB Keeper](companion/adb-keeper/README.md)
 - [适配其他 Android 智能显示器](docs/adapt-new-device.md)
 - [配置字段说明](docs/configuration.md)
 - [故障排查](docs/troubleshooting.md)

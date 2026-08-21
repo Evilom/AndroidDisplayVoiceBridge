@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="io.github.androiddisplayvoicebridge.adbkeeper">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
+    <application
+        android:allowBackup="false"
+        android:directBootAware="true"
+        android:label="ADB Keeper"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme.Material.Light">
+
+        <activity
+            android:name="io.github.androiddisplayvoicebridge.adbkeeper.MainActivity"
+            android:exported="true"
+            android:permission="android.permission.DUMP" />
+
+        <receiver
+            android:name="io.github.androiddisplayvoicebridge.adbkeeper.BootReceiver"
+            android:directBootAware="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="mitv.action.STR_BOOT_COMPLETED" />
+                <action android:name="mitv.intent.action.STARTAPPS_PRIORITY_HIGH_PENDING" />
+                <action android:name="mitv.intent.action.STARTAPPS_PRIORITY_MIDDLE_PENDING" />
+                <action android:name="mitv.intent.action.STARTAPPS_PRIORITY_NORMAL_PENDING" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="io.github.androiddisplayvoicebridge.adbkeeper.CheckReceiver"
+            android:directBootAware="true"
+            android:exported="false" />
+
+        <!-- A diagnostic hook callable by the ADB shell, not ordinary apps. -->
+        <receiver
+            android:name="io.github.androiddisplayvoicebridge.adbkeeper.ShellReceiver"
+            android:exported="true"
+            android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="io.github.androiddisplayvoicebridge.adbkeeper.SCHEDULE" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>

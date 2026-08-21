@@ -13,6 +13,7 @@
 | `unauthorized` | 显示器尚未确认 RSA | 查看显示器弹窗；必要时撤销调试授权后重连 |
 | `offline` / 反复断开 | IP 变化、端口变化、休眠或网络隔离 | 核对 IP；做 DHCP 保留；检查 AP 隔离 |
 | 开关显示已开，但 5555 拒绝连接 | 固件待机后停止了 `adbd` | 关→开 ADB；确认功耗后启用 `keepAndroidAwakeWhilePowered` |
+| 完整重启后 5555 先出现再关闭 | HyperOS 启动阶段复位 ADB | Redmi G Pro 27U 2026 可选装 [ADB Keeper](../companion/adb-keeper/README.md)；其他型号先验证白名单 |
 | 按遥控器没有 `microphone DOWN` | `inputDevice` / `keyToken` 错误 | 重新运行 `diagnose-device.ps1 -Mode keys` |
 | 有 DOWN / UP，没有最终文本 | logcat tag 或正则错误；云 ASR 不可用 | 用 `-Mode logs` 重新取样；先验证原生助手能识别 |
 | 有 `ignored unarmed final ASR` | 最终日志超过等待窗口，或按键事件没有被捕获 | 先修按键配置；必要时调大 timeout |
